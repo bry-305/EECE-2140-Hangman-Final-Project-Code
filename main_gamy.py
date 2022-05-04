@@ -80,28 +80,44 @@
 
 
 def get_word():
-   word = input("Input the word that you want your friend to guess (has to be 5 letters)")
+   print("\n")
+   word = input("Input the word that you want your friend to guess: ")
 
-   if len(word) != 5:
-      print("The length of the word has to be 5 letters. Try another one.")
-       #add code here so the student can input a new word if the length isn't 5 letters
+   len_word = len(word)
+
+
    return word.upper()
 
 
 #maybe add a hint option?
 
 
-def get_guess():
-   guess = input("What is your guess?: ")
-   if len(guess) == 1:
-
-      print(f"You're guess of {guess.upper()}")
-            #this is an option for if the user inputs a single letter
-   return guess
+def check_guess(word):
 
 
+   blank_word = "_" * len(word)
+   guessed = False
+   while not guessed and tries > 0:
+      guess = input("Please guess a letter or word: ").upper()
 
-def word_checker(guess):
+   if guess in word:
+      word = list(word)
+      indices = [i for i, letter in enumerate(word) if letter == guess]
+      for index in indices:
+          word[index] = guess
+      word_complettion = "".join(word)
+      if "_" not in word:
+          guessed = True
+
+
+
+   # if len(guess) == 1:
+   #
+   #    print(f"You're guess of {guess.upper()}")
+   #          #this is an option for if the user inputs a single letter
+   # return guess
+
+
 
 tries = 7
 
@@ -120,6 +136,9 @@ tries = 7
 print("Hello, welcome to Hangmamn!")
 
 word = get_word()
+
+check_guess(word)
+
 
 print(word)
 
